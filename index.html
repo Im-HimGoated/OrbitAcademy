@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbit Academy</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Orbit Academy home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Orbit Academy</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#plan">Plan</a>
+        <a href="#paths">Paths</a>
+        <a href="#build-lab">Build</a>
+        <a href="#missions">Missions</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-image"
+          src="assets/space-academy-hero.png"
+          alt="Students inside a space training center watching a rocket launch"
+        />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Mission training for future explorers</p>
+          <h1 id="hero-title">Your path to space starts before you feel ready.</h1>
+          <p class="hero-copy">
+            Pick a role, try a mission, and see how school skills turn into astronaut and
+            engineering skills one small launch at a time.
+          </p>
+          <div class="hero-actions" aria-label="Page shortcuts">
+            <a class="primary-action" href="#paths">Choose your path</a>
+            <a class="secondary-action" href="#missions">Start a mini mission</a>
+          </div>
+        </div>
+        <div class="mission-readout" aria-label="Mission status">
+          <span>Confidence signal</span>
+          <strong>Rising</strong>
+          <small>Curiosity + practice + teamwork</small>
+        </div>
+      </section>
+
+      <section class="intro-band" aria-label="Main message">
+        <div>
+          <p class="section-kicker">The message</p>
+          <h2>Space is not only for people who already know everything.</h2>
+        </div>
+        <p>
+          It is for students who ask strong questions, build things that break, learn from
+          mistakes, and keep showing up. This website turns a giant dream into a visible path.
+        </p>
+      </section>
+
+      <section class="plan-section" id="plan" aria-labelledby="plan-title">
+        <div class="section-heading">
+          <p class="section-kicker">Five-step plan</p>
+          <h2 id="plan-title">From “space is cool” to “I can train for this.”</h2>
+        </div>
+        <div class="plan-grid">
+          <article class="step-card">
+            <span>01</span>
+            <h3>Spark the Mission</h3>
+            <p>Open with launches, rovers, astronauts, and mission control moments that feel real.</p>
+          </article>
+          <article class="step-card">
+            <span>02</span>
+            <h3>Find Your Space Role</h3>
+            <p>Show that space needs pilots, engineers, coders, doctors, builders, writers, and designers.</p>
+          </article>
+          <article class="step-card">
+            <span>03</span>
+            <h3>Build the Skills</h3>
+            <p>Connect math, science, reading, coding, creativity, and teamwork to real missions.</p>
+          </article>
+          <article class="step-card">
+            <span>04</span>
+            <h3>Try Mini Missions</h3>
+            <p>Let students test ideas with hands-on challenges, badges, and design choices.</p>
+          </article>
+          <article class="step-card">
+            <span>05</span>
+            <h3>Launch Your Path</h3>
+            <p>Give clear next steps for this week, this year, and later in high school or college.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="path-section" id="paths" aria-labelledby="paths-title">
+        <div class="section-heading">
+          <p class="section-kicker">Choose your mission path</p>
+          <h2 id="paths-title">What do you like doing?</h2>
+        </div>
+        <div class="path-tool">
+          <div class="interest-panel" aria-label="Student interests">
+            <button class="interest-button is-active" data-path="build" type="button">
+              <span class="button-icon" aria-hidden="true">+</span>
+              Build things
+            </button>
+            <button class="interest-button" data-path="code" type="button">
+              <span class="button-icon" aria-hidden="true">&lt;/&gt;</span>
+              Code puzzles
+            </button>
+            <button class="interest-button" data-path="explore" type="button">
+              <span class="button-icon" aria-hidden="true">?</span>
+              Ask big questions
+            </button>
+            <button class="interest-button" data-path="lead" type="button">
+              <span class="button-icon" aria-hidden="true">!</span>
+              Lead a team
+            </button>
+          </div>
+
+          <article class="career-output" aria-live="polite">
+            <p class="output-label">Matched space role</p>
+            <h3 id="role-title">Aerospace Engineer</h3>
+            <p id="role-copy">
+              You could design rockets, test parts, and improve vehicles until they can survive launch.
+            </p>
+            <div class="output-grid">
+              <div>
+                <span>Starter skill</span>
+                <strong id="skill-output">Measure, sketch, and improve a prototype</strong>
+              </div>
+              <div>
+                <span>Mini mission</span>
+                <strong id="mission-output">Build a paper rocket, change one fin, and compare flights</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="training-console" aria-live="polite">
+          <div class="console-status">
+            <div>
+              <p class="output-label">Path training console</p>
+              <h3 id="training-path-title">Aerospace Engineer Prep</h3>
+            </div>
+            <div class="training-score" aria-label="Path training progress">
+              <span>Tasks finished</span>
+              <strong id="task-count">0</strong>
+            </div>
+          </div>
+
+          <div class="task-workbench">
+            <article class="active-task">
+              <span id="task-type">Prototype drill</span>
+              <h4 id="task-title">Improve a rocket fin</h4>
+              <p id="task-copy">
+                Choose one thing about a paper rocket fin you would change to make the flight straighter.
+              </p>
+              <fieldset class="task-checklist" id="task-checklist">
+                <legend>Do the prep</legend>
+              </fieldset>
+              <label class="mission-note">
+                <span id="note-label">Mission note</span>
+                <textarea
+                  id="task-note"
+                  rows="4"
+                  placeholder="Write what you tried, noticed, or decided."
+                ></textarea>
+              </label>
+              <div class="task-actions">
+                <button class="primary-action task-complete" id="complete-task" type="button" disabled>
+                  Finish task
+                </button>
+                <button class="secondary-action" id="skip-task" type="button">Generate another</button>
+              </div>
+            </article>
+
+            <aside class="training-log" aria-label="Completed path training tasks">
+              <span>Training log</span>
+              <ol id="training-log-list">
+                <li>Choose a path to begin your preparation record.</li>
+              </ol>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="build-section" id="build-lab" aria-labelledby="build-title">
+        <div class="section-heading">
+          <p class="section-kicker">Virtual build lab</p>
+          <h2 id="build-title">Place parts, rotate them, then test the design.</h2>
+        </div>
+        <div class="builder-shell">
+          <aside class="parts-panel" aria-label="Build parts">
+            <p class="output-label">Add parts</p>
+            <button class="part-button" type="button" data-part="nose">Nose cone</button>
+            <button class="part-button" type="button" data-part="body">Rocket body</button>
+            <button class="part-button" type="button" data-part="fin">Stability fin</button>
+            <button class="part-button" type="button" data-part="engine">Engine</button>
+            <div class="builder-controls">
+              <button class="secondary-action" id="rotate-part" type="button">Rotate selected</button>
+              <button class="secondary-action" id="remove-part" type="button">Remove selected</button>
+              <button class="secondary-action" id="clear-build" type="button">Clear build</button>
+            </div>
+          </aside>
+
+          <div class="build-pad-wrap">
+            <div class="build-pad" id="build-pad" aria-label="Rocket build area">
+              <div class="pad-grid" aria-hidden="true"></div>
+              <p class="build-empty" id="build-empty">Add parts to start building.</p>
+            </div>
+          </div>
+
+          <aside class="test-panel" aria-label="Design test results">
+            <p class="output-label">Test station</p>
+            <div class="test-meter">
+              <span>Flight score</span>
+              <strong id="flight-score">0</strong>
+            </div>
+            <p id="test-feedback">Build a rocket with a body, engine, nose cone, and fins, then run a test.</p>
+            <button class="primary-action" id="test-build" type="button">Run test</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="missions-section" id="missions" aria-labelledby="missions-title">
+        <div class="section-heading">
+          <p class="section-kicker">Mini missions</p>
+          <h2 id="missions-title">Practice like a mission team.</h2>
+        </div>
+        <div class="mission-grid">
+          <article class="mission-card">
+            <div class="mission-icon launch-icon" aria-hidden="true"></div>
+            <h3>Launch Lab</h3>
+            <p>Build two paper rockets, change one feature, and record which design flies farther.</p>
+            <fieldset class="mission-checklist">
+              <legend>Badge checklist</legend>
+              <label>
+                <input type="checkbox" />
+                Build two rocket designs
+              </label>
+              <label>
+                <input type="checkbox" />
+                Test both flights
+              </label>
+              <label>
+                <input type="checkbox" />
+                Record what changed
+              </label>
+            </fieldset>
+            <button class="badge-button" type="button" data-badge="Launch Lab" disabled>
+              Complete checklist
+            </button>
+          </article>
+          <article class="mission-card">
+            <div class="mission-icon rover-icon" aria-hidden="true"></div>
+            <h3>Rover Rescue</h3>
+            <p>Design a rover that can cross a bumpy surface and carry a small science sample.</p>
+            <fieldset class="mission-checklist">
+              <legend>Badge checklist</legend>
+              <label>
+                <input type="checkbox" />
+                Sketch the rover
+              </label>
+              <label>
+                <input type="checkbox" />
+                Add wheels or supports
+              </label>
+              <label>
+                <input type="checkbox" />
+                Carry a sample across bumps
+              </label>
+            </fieldset>
+            <button class="badge-button" type="button" data-badge="Rover Rescue" disabled>
+              Complete checklist
+            </button>
+          </article>
+          <article class="mission-card">
+            <div class="mission-icon orbit-icon" aria-hidden="true"></div>
+            <h3>Orbit Coder</h3>
+            <p>Write step-by-step commands to guide a satellite around obstacles on a grid.</p>
+            <fieldset class="mission-checklist">
+              <legend>Badge checklist</legend>
+              <label>
+                <input type="checkbox" />
+                Draw a space grid
+              </label>
+              <label>
+                <input type="checkbox" />
+                Add three obstacles
+              </label>
+              <label>
+                <input type="checkbox" />
+                Write the command sequence
+              </label>
+            </fieldset>
+            <button class="badge-button" type="button" data-badge="Orbit Coder" disabled>
+              Complete checklist
+            </button>
+          </article>
+        </div>
+        <div class="badge-tray" aria-live="polite">
+          <span>Badges earned</span>
+          <strong id="badge-count">0</strong>
+          <p id="badge-message">Complete a mini mission to start your training record.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Orbit Academy helps students see a future in space exploration through curiosity, practice, and real next steps.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
