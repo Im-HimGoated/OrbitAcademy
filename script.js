@@ -1,28 +1,28 @@
 const pathData = {
   build: {
     title: "Aerospace Engineer",
-    copy: "You could design rockets, test parts, and improve vehicles until they can survive launch.",
+    copy: "Design rockets, test parts, and improve vehicles until they are ready for launch.",
     skill: "Measure, sketch, and improve a prototype",
     mission: "Build a paper rocket, change one fin, and compare flights",
     prepTitle: "Aerospace Engineer Prep",
   },
   code: {
     title: "Flight Software Developer",
-    copy: "You could write instructions that help spacecraft steer, collect data, and stay safe.",
+    copy: "Write instructions that help spacecraft steer, collect data, and stay safe.",
     skill: "Break a problem into clear step-by-step commands",
     mission: "Create a grid map and write commands to guide a satellite home",
     prepTitle: "Flight Software Prep",
   },
   explore: {
     title: "Planetary Scientist",
-    copy: "You could study planets, moons, rocks, and signals to figure out what space is made of.",
+    copy: "Study planets, moons, rocks, and signals to learn what space is made of.",
     skill: "Observe carefully and explain evidence",
     mission: "Compare three mystery rocks and choose which one a rover should sample",
     prepTitle: "Planetary Scientist Prep",
   },
   lead: {
     title: "Mission Director",
-    copy: "You could help a team make choices, solve problems, and keep a mission moving.",
+    copy: "Help a team make choices, solve problems, and keep a mission moving.",
     skill: "Listen, organize tasks, and make a plan",
     mission: "Run a five-minute mission meeting and assign launch roles",
     prepTitle: "Mission Director Prep",
@@ -34,8 +34,8 @@ const taskDecks = {
     {
       type: "Prototype drill",
       title: "Improve a rocket fin",
-      copy: "Choose one thing about a paper rocket fin you would change to make the flight straighter.",
-      steps: ["Pick the part you would change", "Predict what the change will do", "Name one way to test it"],
+      copy: "Choose one change to help a paper rocket fly straighter.",
+      steps: ["Pick the part to change", "Predict what the change will do", "Name one way to test it"],
       note: "Write your design change and why it might help.",
     },
     {
@@ -48,7 +48,7 @@ const taskDecks = {
     {
       type: "Redesign sprint",
       title: "Fix a wobbly lander",
-      copy: "A model lander tips over after touchdown. Decide how you would make it more stable.",
+      copy: "A model lander tips over after touchdown. Decide how to make it more stable.",
       steps: ["Identify why it tips", "Add one stability feature", "Decide how to measure success"],
       note: "Write your lander fix in one or two sentences.",
     },
@@ -57,7 +57,7 @@ const taskDecks = {
     {
       type: "Command sequence",
       title: "Guide a satellite",
-      copy: "Create a short command list that moves a satellite around one obstacle and back to signal range.",
+      copy: "Create a short command list that moves a satellite around one obstacle and back into signal range.",
       steps: ["Choose a start and finish", "Add one obstacle", "Write at least four commands"],
       note: "Write your commands using words like forward, turn, scan, or transmit.",
     },
@@ -81,7 +81,7 @@ const taskDecks = {
       type: "Evidence log",
       title: "Pick a rover sample",
       copy: "A rover can collect only one rock. Choose the sample that gives the best science clue.",
-      steps: ["Choose a question to investigate", "Pick a sample type", "Explain what it could reveal"],
+      steps: ["Choose a science question", "Pick a sample type", "Explain what it could reveal"],
       note: "Write the sample you would collect and the clue you hope to find.",
     },
     {
@@ -104,7 +104,7 @@ const taskDecks = {
       type: "Team planning",
       title: "Assign launch roles",
       copy: "A mission team needs clear jobs before launch. Decide who handles design, testing, timing, and notes.",
-      steps: ["List three mission jobs", "Choose the first job to start", "Name one check-in question"],
+      steps: ["List three mission jobs", "Choose the first job to start", "Write one check-in question"],
       note: "Write your role plan for the team.",
     },
     {
@@ -245,10 +245,12 @@ const badgeMessage = document.querySelector("#badge-message");
 const buildPad = document.querySelector("#build-pad");
 const buildEmpty = document.querySelector("#build-empty");
 const flightScore = document.querySelector("#flight-score");
+const scoreStatus = document.querySelector("#score-status");
 const testFeedback = document.querySelector("#test-feedback");
 let selectedPart = null;
 let dragState = null;
 let partNumber = 0;
+let buildNeedsRetest = false;
 
 const partDefaults = {
   nose: { className: "part-nose", label: "Nose cone", x: 245, y: 76 },
@@ -259,6 +261,18 @@ const partDefaults = {
 
 function updateBuildEmptyState() {
   buildEmpty.hidden = buildPad.querySelectorAll(".rocket-part").length > 0;
+}
+
+function markBuildNeedsRetest() {
+  if (!buildPad.querySelector(".rocket-part")) {
+    buildNeedsRetest = false;
+    scoreStatus.textContent = "Not tested";
+    return;
+  }
+
+  buildNeedsRetest = true;
+  scoreStatus.textContent = "Needs retest";
+  testFeedback.textContent = "Design changed. Run a test for the current flight score.";
 }
 
 function selectPart(part) {
@@ -308,6 +322,7 @@ function addPart(type) {
   buildPad.append(part);
   selectPart(part);
   updateBuildEmptyState();
+  markBuildNeedsRetest();
 }
 
 function rotateSelectedPart() {
@@ -316,6 +331,7 @@ function rotateSelectedPart() {
   const nextRotation = (Number(selectedPart.dataset.rotation) + 45) % 360;
   selectedPart.dataset.rotation = String(nextRotation);
   selectedPart.style.transform = `rotate(${nextRotation}deg)`;
+  markBuildNeedsRetest();
 }
 
 function removeSelectedPart() {
@@ -324,9 +340,27 @@ function removeSelectedPart() {
   selectedPart.remove();
   selectedPart = null;
   updateBuildEmptyState();
+  markBuildNeedsRetest();
 }
 
-function testBuild() {
+function getPartCenter(part) {
+  return {
+    x: part.offsetLeft + part.offsetWidth / 2,
+    y: part.offsetTop + part.offsetHeight / 2,
+  };
+}
+
+function distanceBetween(partA, partB) {
+  const a = getPartCenter(partA);
+  const b = getPartCenter(partB);
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function isStraight(part) {
+  return Number(part.dataset.rotation) % 90 === 0;
+}
+
+function calculateFlightTest() {
   const parts = Array.from(buildPad.querySelectorAll(".rocket-part"));
   const counts = parts.reduce(
     (current, part) => {
@@ -335,32 +369,80 @@ function testBuild() {
     },
     { nose: 0, body: 0, fin: 0, engine: 0 }
   );
-  const rotations = parts.map((part) => Number(part.dataset.rotation));
-  const centeredBodies = parts
-    .filter((part) => part.dataset.part === "body")
-    .filter((part) => {
-      const center = part.offsetLeft + part.offsetWidth / 2;
-      return Math.abs(center - buildPad.clientWidth / 2) < 70;
-    }).length;
+  const body = parts.find((part) => part.dataset.part === "body");
+  const nose = parts.find((part) => part.dataset.part === "nose");
+  const engine = parts.find((part) => part.dataset.part === "engine");
+  const fins = parts.filter((part) => part.dataset.part === "fin");
+  const bodyCenter = body ? getPartCenter(body) : null;
+  const noseCenter = nose ? getPartCenter(nose) : null;
+  const engineCenter = engine ? getPartCenter(engine) : null;
+  const straightParts = parts.filter(isStraight).length;
+  const crookedParts = parts.length - straightParts;
+  const centeredBody = bodyCenter && Math.abs(bodyCenter.x - buildPad.clientWidth / 2) < 70;
+  const noseAligned =
+    bodyCenter &&
+    noseCenter &&
+    noseCenter.y < bodyCenter.y &&
+    Math.abs(noseCenter.x - bodyCenter.x) < 70 &&
+    distanceBetween(nose, body) < 150;
+  const engineAligned =
+    bodyCenter &&
+    engineCenter &&
+    engineCenter.y > bodyCenter.y &&
+    Math.abs(engineCenter.x - bodyCenter.x) < 70 &&
+    distanceBetween(engine, body) < 150;
+  const lowerFins = fins.filter((fin) => {
+    const center = getPartCenter(fin);
+    return bodyCenter && center.y > bodyCenter.y && Math.abs(center.x - bodyCenter.x) < 150;
+  });
+  const hasBalancedFins =
+    lowerFins.some((fin) => getPartCenter(fin).x < bodyCenter.x) &&
+    lowerFins.some((fin) => getPartCenter(fin).x > bodyCenter.x);
 
   let score = 0;
-  if (counts.body > 0) score += 25;
-  if (counts.engine > 0) score += 20;
-  if (counts.nose > 0) score += 20;
-  if (counts.fin >= 2) score += 25;
-  else if (counts.fin === 1) score += 12;
-  if (centeredBodies > 0) score += 10;
-  if (rotations.some((rotation) => rotation % 90 !== 0)) score -= 8;
+  if (counts.body > 0) score += 20;
+  if (counts.engine > 0) score += 15;
+  if (counts.nose > 0) score += 15;
+  if (counts.fin >= 2) score += 15;
+  else if (counts.fin === 1) score += 7;
+  if (centeredBody) score += 10;
+  if (noseAligned) score += 10;
+  if (engineAligned) score += 10;
+  if (hasBalancedFins) score += 10;
+  if (parts.length > 0 && crookedParts === 0) score += 5;
+  score -= crookedParts * 8;
+  if (!counts.body || !counts.engine || !counts.nose) score = Math.min(score, 70);
+  if (counts.fin < 2) score = Math.min(score, 82);
   score = Math.max(0, Math.min(100, score));
 
-  flightScore.textContent = score;
+  const missing = [];
+  if (!counts.body) missing.push("body");
+  if (!counts.engine) missing.push("engine");
+  if (!counts.nose) missing.push("nose cone");
+  if (counts.fin < 2) missing.push("two fins");
 
-  if (score >= 90) {
+  return {
+    score,
+    missing,
+    aligned: { nose: noseAligned, engine: engineAligned, fins: hasBalancedFins, body: centeredBody },
+  };
+}
+
+function testBuild() {
+  const result = calculateFlightTest();
+
+  buildNeedsRetest = false;
+  scoreStatus.textContent = "Current";
+  flightScore.textContent = result.score;
+
+  if (result.missing.length > 0) {
+    testFeedback.textContent = `Missing: ${result.missing.join(", ")}. Add the core parts before launch.`;
+  } else if (result.score >= 90) {
     testFeedback.textContent = "Excellent test. Your rocket has the key systems and strong stability.";
-  } else if (score >= 65) {
-    testFeedback.textContent = "Good start. Add more stability or straighten rotated parts for a better flight.";
-  } else if (score >= 35) {
-    testFeedback.textContent = "Prototype needs work. Try adding a body, engine, nose cone, and two fins.";
+  } else if (result.score >= 65) {
+    testFeedback.textContent = "Good start. Align the nose, engine, and fins more closely for a stronger flight.";
+  } else if (result.score >= 35) {
+    testFeedback.textContent = "Prototype needs work. Move the parts into a clear rocket shape and keep them straight.";
   } else {
     testFeedback.textContent = "Build more before launch. A rocket needs structure, thrust, and stability.";
   }
@@ -376,7 +458,9 @@ document.querySelector("#clear-build").addEventListener("click", () => {
   buildPad.querySelectorAll(".rocket-part").forEach((part) => part.remove());
   selectedPart = null;
   flightScore.textContent = "0";
-  testFeedback.textContent = "Build a rocket with a body, engine, nose cone, and fins, then run a test.";
+  buildNeedsRetest = false;
+  scoreStatus.textContent = "Not tested";
+  testFeedback.textContent = "Add a body, engine, nose cone, and two fins. Then run a test.";
   updateBuildEmptyState();
 });
 document.querySelector("#test-build").addEventListener("click", testBuild);
@@ -393,6 +477,7 @@ window.addEventListener("pointermove", (event) => {
 });
 
 window.addEventListener("pointerup", () => {
+  if (dragState) markBuildNeedsRetest();
   dragState = null;
 });
 

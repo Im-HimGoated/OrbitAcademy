@@ -290,15 +290,20 @@ h3 {
 
 .section-heading {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(220px, 0.3fr);
-  gap: 24px;
-  align-items: end;
+  gap: 8px;
+  max-width: 880px;
   margin-bottom: 32px;
 }
 
 .plan-grid,
 .build-section {
   background: linear-gradient(180deg, rgba(99, 168, 255, 0.08), rgba(255, 205, 104, 0.05));
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .builder-shell {
@@ -449,6 +454,15 @@ h3 {
   color: var(--gold);
   font-size: 3rem;
   line-height: 1;
+}
+
+.test-meter small {
+  display: inline-flex;
+  margin-top: 8px;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
 .test-panel p:not(.output-label) {
