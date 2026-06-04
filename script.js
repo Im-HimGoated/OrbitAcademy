@@ -1,31 +1,31 @@
 const pathData = {
   build: {
     title: "Aerospace Engineer",
-    copy: "Design rockets, test parts, and improve vehicles until they are ready for launch.",
-    skill: "Measure, sketch, and improve a prototype",
-    mission: "Build a paper rocket, change one fin, and compare flights",
-    prepTitle: "Aerospace Engineer Prep",
+    copy: "Invent rocket parts, test them, and keep improving until your launch idea is ready.",
+    skill: "Measure, sketch, and improve your invention",
+    mission: "Build a paper rocket, change one fin, and race the flights",
+    prepTitle: "Rocket Builder Training",
   },
   code: {
     title: "Flight Software Developer",
-    copy: "Write instructions that help spacecraft steer, collect data, and stay safe.",
-    skill: "Break a problem into clear step-by-step commands",
-    mission: "Create a grid map and write commands to guide a satellite home",
-    prepTitle: "Flight Software Prep",
+    copy: "Give spacecraft clear commands so they can steer, scan, and get home safely.",
+    skill: "Turn a puzzle into step-by-step commands",
+    mission: "Make a grid map and code a satellite back to base",
+    prepTitle: "Space Coder Training",
   },
   explore: {
     title: "Planetary Scientist",
-    copy: "Study planets, moons, rocks, and signals to learn what space is made of.",
-    skill: "Observe carefully and explain evidence",
-    mission: "Compare three mystery rocks and choose which one a rover should sample",
-    prepTitle: "Planetary Scientist Prep",
+    copy: "Hunt for clues in planets, moons, rocks, and strange space signals.",
+    skill: "Notice details and explain your clues",
+    mission: "Compare mystery rocks and pick one for a rover to collect",
+    prepTitle: "Planet Detective Training",
   },
   lead: {
     title: "Mission Director",
-    copy: "Help a team make choices, solve problems, and keep a mission moving.",
-    skill: "Listen, organize tasks, and make a plan",
-    mission: "Run a five-minute mission meeting and assign launch roles",
-    prepTitle: "Mission Director Prep",
+    copy: "Help the crew choose, solve surprises, and keep the mission moving.",
+    skill: "Listen, organize jobs, and make a launch plan",
+    mission: "Run a quick crew meeting and assign launch roles",
+    prepTitle: "Crew Captain Training",
   },
 };
 
@@ -34,92 +34,92 @@ const taskDecks = {
     {
       type: "Prototype drill",
       title: "Improve a rocket fin",
-      copy: "Choose one change to help a paper rocket fly straighter.",
-      steps: ["Pick the part to change", "Predict what the change will do", "Name one way to test it"],
-      note: "Write your design change and why it might help.",
+      copy: "Your rocket wiggles in the air. Pick one fin change that could make it fly straighter.",
+      steps: ["Pick the part to change", "Guess what the change will do", "Name one way to test it"],
+      note: "Mission note: what will you change, and why?",
     },
     {
       type: "Engineering check",
       title: "Choose the strongest material",
-      copy: "A rover arm needs to hold a small sample. Compare two household materials and choose one.",
+      copy: "A rover arm has to carry a tiny sample. Choose which material gets the job.",
       steps: ["Name two possible materials", "Choose the stronger option", "Explain the tradeoff"],
-      note: "Write which material wins and what weakness it might still have.",
+      note: "Mission note: which material wins, and what is its weakness?",
     },
     {
       type: "Redesign sprint",
       title: "Fix a wobbly lander",
-      copy: "A model lander tips over after touchdown. Decide how to make it more stable.",
+      copy: "A lander tips over after touchdown. Rescue it with one smart design fix.",
       steps: ["Identify why it tips", "Add one stability feature", "Decide how to measure success"],
-      note: "Write your lander fix in one or two sentences.",
+      note: "Mission note: write your lander rescue idea.",
     },
   ],
   code: [
     {
       type: "Command sequence",
       title: "Guide a satellite",
-      copy: "Create a short command list that moves a satellite around one obstacle and back into signal range.",
+      copy: "A satellite lost its signal. Create commands that steer it around danger and back to base.",
       steps: ["Choose a start and finish", "Add one obstacle", "Write at least four commands"],
-      note: "Write your commands using words like forward, turn, scan, or transmit.",
+      note: "Mission note: write commands like forward, turn, scan, or transmit.",
     },
     {
       type: "Debug drill",
       title: "Find the bad instruction",
-      copy: "A rover keeps turning before it scans. Decide which command should move earlier or later.",
+      copy: "A rover keeps turning before it scans. Move one command to fix the robot brain.",
       steps: ["Spot the command order problem", "Move one command", "Explain why the new order works"],
-      note: "Write the old problem and your corrected order.",
+      note: "Mission note: write the old problem and your fixed order.",
     },
     {
       type: "Sensor logic",
       title: "Make a safety rule",
-      copy: "Write a simple if-then rule that tells a rover what to do when it sees a cliff.",
+      copy: "Help a rover avoid cliffs with one simple if-then safety rule.",
       steps: ["Name the sensor signal", "Choose the safe action", "Add a backup action"],
-      note: "Write your if-then safety rule.",
+      note: "Mission note: write your if-then safety rule.",
     },
   ],
   explore: [
     {
       type: "Evidence log",
       title: "Pick a rover sample",
-      copy: "A rover can collect only one rock. Choose the sample that gives the best science clue.",
+      copy: "A rover can collect only one rock. Pick the sample with the best secret clue.",
       steps: ["Choose a science question", "Pick a sample type", "Explain what it could reveal"],
-      note: "Write the sample you would collect and the clue you hope to find.",
+      note: "Mission note: which sample would you grab, and why?",
     },
     {
       type: "Observation drill",
       title: "Compare two planets",
-      copy: "Choose two planet features to compare, such as atmosphere, temperature, gravity, or moons.",
+      copy: "Compare two planets like a space detective looking for surprising differences.",
       steps: ["Pick two features", "Make one comparison", "Ask one follow-up question"],
-      note: "Write the comparison and your follow-up question.",
+      note: "Mission note: write your comparison and one new question.",
     },
     {
       type: "Mission question",
       title: "Ask a testable question",
-      copy: "Turn a big space question into something a robot, telescope, or astronaut could actually measure.",
+      copy: "Turn a giant space question into something a robot, telescope, or astronaut could measure.",
       steps: ["Write the big question", "Choose what to measure", "Name the tool that could measure it"],
-      note: "Write the testable version of your question.",
+      note: "Mission note: write the testable version of your question.",
     },
   ],
   lead: [
     {
       type: "Team planning",
       title: "Assign launch roles",
-      copy: "A mission team needs clear jobs before launch. Decide who handles design, testing, timing, and notes.",
+      copy: "Your crew needs jobs before launch. Decide who builds, tests, times, and takes notes.",
       steps: ["List three mission jobs", "Choose the first job to start", "Write one check-in question"],
-      note: "Write your role plan for the team.",
+      note: "Mission note: write your crew job plan.",
     },
     {
       type: "Decision drill",
       title: "Choose under pressure",
-      copy: "Your team has ten minutes left and two fixes to try. Pick one and explain how you decide.",
+      copy: "Your crew has ten minutes and two possible fixes. Pick the one you trust most.",
       steps: ["Name both options", "Pick the safer next move", "Explain the reason"],
-      note: "Write the decision and what evidence helped you choose.",
+      note: "Mission note: write your decision and the clue that helped.",
     },
     {
       type: "Communication check",
       title: "Send a mission update",
-      copy: "Write a short update that tells the team what happened, what changed, and what happens next.",
+      copy: "Send a quick update so everyone knows what happened and what comes next.",
       steps: ["State the current status", "Name one problem or success", "Give the next action"],
-      note: "Write the mission update in two clear sentences.",
+      note: "Mission note: write the update in two clear sentences.",
     },
   ],
 };
@@ -140,9 +140,13 @@ const completeTaskButton = document.querySelector("#complete-task");
 const skipTaskButton = document.querySelector("#skip-task");
 const taskCount = document.querySelector("#task-count");
 const trainingLogList = document.querySelector("#training-log-list");
+const sparkMeter = document.querySelector("#spark-meter");
+const simStage = document.querySelector("#sim-stage");
+const simChoices = document.querySelector("#sim-choices");
 let activePath = "build";
 let activeTaskIndex = 0;
 let finishedTasks = 0;
+let sparkLevel = 0;
 const pathProgress = {
   build: [],
   code: [],
@@ -160,9 +164,11 @@ function renderTask() {
   taskCopy.textContent = task.copy;
   noteLabel.textContent = task.note;
   taskNote.value = "";
+  sparkLevel = 0;
+  updateSparkMeter();
   completeTaskButton.disabled = true;
-  completeTaskButton.textContent = "Finish task";
-  taskChecklist.innerHTML = "<legend>Do the prep</legend>";
+  completeTaskButton.textContent = "Clear quest";
+  taskChecklist.innerHTML = "<legend>Clear the quest</legend>";
 
   task.steps.forEach((step) => {
     const label = document.createElement("label");
@@ -181,7 +187,7 @@ function renderTrainingLog() {
 
   if (completed.length === 0) {
     const emptyItem = document.createElement("li");
-    emptyItem.textContent = "Finish a prep task to begin this path record.";
+    emptyItem.textContent = "Clear a quest to start this path record.";
     trainingLogList.append(emptyItem);
     return;
   }
@@ -197,8 +203,21 @@ function updateTaskReadyState() {
   const checks = Array.from(taskChecklist.querySelectorAll("input"));
   const allChecked = checks.every((check) => check.checked);
   const hasNote = taskNote.value.trim().length >= 12;
+  const enoughSpark = sparkLevel >= 45;
 
-  completeTaskButton.disabled = !(allChecked && hasNote);
+  completeTaskButton.disabled = !(allChecked && hasNote && enoughSpark);
+  completeTaskButton.textContent = enoughSpark ? "Clear quest" : "Power up simulator";
+}
+
+function updateSparkMeter() {
+  sparkMeter.textContent = `${sparkLevel}%`;
+  simStage.classList.toggle("is-boosted", sparkLevel >= 45);
+}
+
+function boostSpark(amount) {
+  sparkLevel = Math.min(100, sparkLevel + amount);
+  updateSparkMeter();
+  updateTaskReadyState();
 }
 
 function moveToNextTask() {
@@ -238,10 +257,18 @@ completeTaskButton.addEventListener("click", () => {
 });
 
 skipTaskButton.addEventListener("click", moveToNextTask);
+simChoices.addEventListener("click", (event) => {
+  const choice = event.target.closest("button");
+  if (!choice) return;
+
+  boostSpark(Number(choice.dataset.boost));
+});
 
 const earnedBadges = new Set();
 const badgeCount = document.querySelector("#badge-count");
 const badgeMessage = document.querySelector("#badge-message");
+const badgePop = document.querySelector("#badge-pop");
+const badgePopCopy = document.querySelector("#badge-pop-copy");
 const buildPad = document.querySelector("#build-pad");
 const buildEmpty = document.querySelector("#build-empty");
 const flightScore = document.querySelector("#flight-score");
@@ -495,6 +522,12 @@ document.querySelectorAll(".badge-button").forEach((button) => {
       earnedBadges.size === 3
         ? "Training record complete: you tried every mini mission."
         : `${badge} added to your training record.`;
+    badgePopCopy.textContent = `${badge} unlocked`;
+    badgePop.setAttribute("aria-hidden", "false");
+    badgePop.classList.remove("is-visible");
+    void badgePop.offsetWidth;
+    badgePop.classList.add("is-visible");
+    window.setTimeout(() => badgePop.setAttribute("aria-hidden", "true"), 2400);
   });
 });
 
