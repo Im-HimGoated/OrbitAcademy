@@ -29,11 +29,11 @@
         />
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <p class="eyebrow">Astronaut training starts here</p>
-          <h1 id="hero-title">Your space adventure begins today.</h1>
+          <p class="eyebrow">Future astronauts, report in</p>
+          <h1 id="hero-title">Train for space one awesome quest at a time.</h1>
           <p class="hero-copy">
-            Pick a crew role, try tiny missions, build a rocket, and discover how the
-            things you learn at school can help you explore space.
+            Pick the crew job that sounds fun, fly tiny missions, build a rocket,
+            and see how your school skills can become space skills.
           </p>
           <div class="hero-actions" aria-label="Page shortcuts">
             <a class="primary-action" href="#paths">Choose your path</a>
@@ -41,62 +41,62 @@
           </div>
         </div>
         <div class="mission-readout" aria-label="Mission status">
-          <span>Ready-o-meter</span>
-          <strong>Leveling up</strong>
-          <small>Wonder + practice + teamwork</small>
+          <span>Launch mood</span>
+          <strong>Go mode</strong>
+          <small>Curiosity + practice + crew power</small>
         </div>
       </section>
 
       <section class="intro-band" aria-label="Main message">
         <div>
-          <p class="section-kicker">Your launch message</p>
-          <h2>You do not have to know everything to start dreaming big.</h2>
+          <p class="section-kicker">Space secret</p>
+          <h2>You can start before you know all the answers.</h2>
         </div>
         <p>
-          Astronauts and space teams ask questions, try ideas, learn from mistakes, and
-          keep going. Every sketch, science question, code puzzle, and team plan can become
-          a real step toward space.
+          Astronauts ask weird questions, try brave ideas, fix mistakes, and keep
+          going. A sketch, science question, code puzzle, or team plan can be your
+          next tiny step toward space.
         </p>
       </section>
 
       <section class="plan-section" id="plan" aria-labelledby="plan-title">
         <div class="section-heading">
-          <p class="section-kicker">Launch map</p>
-          <h2 id="plan-title">Five ways to start acting like a space explorer.</h2>
+          <p class="section-kicker">Quest map</p>
+          <h2 id="plan-title">Five ways to start training like a space explorer.</h2>
         </div>
         <div class="plan-grid">
           <article class="step-card">
             <span>01</span>
             <h3>Spot the Wow</h3>
-            <p>Watch launches, rovers, spacewalks, and mission control moments until space feels real.</p>
+            <p>Watch launches, rovers, spacewalks, and mission-control moments that make you say, "Whoa."</p>
           </article>
           <article class="step-card">
             <span>02</span>
             <h3>Pick a Crew Job</h3>
-            <p>Explore how pilots, engineers, coders, doctors, builders, writers, and designers help missions fly.</p>
+            <p>Find out how pilots, engineers, coders, doctors, builders, writers, and designers help missions fly.</p>
           </article>
           <article class="step-card">
             <span>03</span>
             <h3>Power Up Skills</h3>
-            <p>Use math, science, reading, coding, creativity, and teamwork on mission-style challenges.</p>
+            <p>Use math, science, reading, coding, creativity, and teamwork to beat space challenges.</p>
           </article>
           <article class="step-card">
             <span>04</span>
             <h3>Try Mini Missions</h3>
-            <p>Test ideas, earn badges, and make choices that change what happens next.</p>
+            <p>Test wild ideas, earn bright badges, and make choices that change what happens next.</p>
           </article>
           <article class="step-card">
             <span>05</span>
             <h3>Choose Next Quest</h3>
-            <p>Pick one thing to try this week, one thing to learn this year, and one big dream for later.</p>
+            <p>Pick one thing to try this week, one thing to learn this year, and one giant dream for later.</p>
           </article>
         </div>
       </section>
 
       <section class="path-section" id="paths" aria-labelledby="paths-title">
         <div class="section-heading">
-          <p class="section-kicker">Choose your mission path</p>
-          <h2 id="paths-title">Tap what you like, then train like that crew member.</h2>
+          <p class="section-kicker">Pick your crew path</p>
+          <h2 id="paths-title">Tap what sounds fun, then fly a quick training quest.</h2>
         </div>
         <div class="path-tool">
           <div class="interest-panel" aria-label="Student interests">
@@ -119,7 +119,7 @@
           </div>
 
           <article class="career-output" aria-live="polite">
-            <p class="output-label">Crew match</p>
+            <p class="output-label">Your crew match</p>
             <h3 id="role-title">Aerospace Engineer</h3>
             <p id="role-copy">
               Invent rocket parts, test them, and keep improving until your launch idea is ready.
@@ -139,11 +139,11 @@
         <div class="training-console" aria-live="polite">
           <div class="console-status">
             <div>
-              <p class="output-label">Path training simulator</p>
+              <p class="output-label">3D cockpit quest</p>
               <h3 id="training-path-title">Aerospace Engineer Prep</h3>
             </div>
             <div class="training-score" aria-label="Path training progress">
-              <span>Quests cleared</span>
+              <span>Quest wins</span>
               <strong id="task-count">0</strong>
             </div>
           </div>
@@ -157,6 +157,7 @@
               </p>
               <div class="training-sim" aria-label="Interactive 3D training bay">
                 <div class="sim-stage" id="sim-stage">
+                  <div class="sim-title">3D Training Bay</div>
                   <div class="sim-orbit" aria-hidden="true"></div>
                   <div class="sim-planet" aria-hidden="true"></div>
                   <div class="sim-ship" id="sim-ship" aria-hidden="true">
@@ -166,13 +167,17 @@
                 </div>
                 <div class="sim-panel">
                   <div class="sim-meter">
-                    <span>Mission spark</span>
+                    <span>Booster meter</span>
                     <strong id="spark-meter">0%</strong>
+                    <div class="sim-meter-bar" aria-hidden="true"><i id="spark-fill"></i></div>
                   </div>
+                  <p class="sim-feedback" id="sim-feedback">
+                    Press the cockpit buttons to power the ship before you clear the quest.
+                  </p>
                   <div class="sim-choices" id="sim-choices" aria-label="Mission choices">
-                    <button type="button" data-boost="14">Scan clue</button>
-                    <button type="button" data-boost="18">Build idea</button>
-                    <button type="button" data-boost="22">Launch boost</button>
+                    <button type="button" data-boost="14" data-action="scan">Scan clue</button>
+                    <button type="button" data-boost="18" data-action="build">Try idea</button>
+                    <button type="button" data-boost="22" data-action="launch">Hit boost</button>
                   </div>
                 </div>
               </div>
@@ -247,7 +252,7 @@
       <section class="missions-section" id="missions" aria-labelledby="missions-title">
         <div class="section-heading">
           <p class="section-kicker">Mini missions</p>
-          <h2 id="missions-title">Finish quick challenges and unlock shiny mission badges.</h2>
+          <h2 id="missions-title">Finish quick challenges and blast open shiny mission badges.</h2>
         </div>
         <div class="mission-grid">
           <article class="mission-card">
@@ -333,6 +338,7 @@
     </footer>
     <div class="badge-pop" id="badge-pop" aria-live="polite" aria-hidden="true">
       <div class="badge-burst" aria-hidden="true"></div>
+      <div class="badge-rays" aria-hidden="true"></div>
       <div class="badge-medal" aria-hidden="true">★</div>
       <strong id="badge-pop-title">Badge earned!</strong>
       <span id="badge-pop-copy">Mission complete</span>

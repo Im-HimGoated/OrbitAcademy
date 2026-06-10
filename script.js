@@ -141,6 +141,8 @@ const skipTaskButton = document.querySelector("#skip-task");
 const taskCount = document.querySelector("#task-count");
 const trainingLogList = document.querySelector("#training-log-list");
 const sparkMeter = document.querySelector("#spark-meter");
+const sparkFill = document.querySelector("#spark-fill");
+const simFeedback = document.querySelector("#sim-feedback");
 const simStage = document.querySelector("#sim-stage");
 const simChoices = document.querySelector("#sim-choices");
 let activePath = "build";
@@ -165,6 +167,8 @@ function renderTask() {
   noteLabel.textContent = task.note;
   taskNote.value = "";
   sparkLevel = 0;
+  simStage.dataset.state = "ready";
+  simFeedback.textContent = "Press the cockpit buttons to power the ship before you clear the quest.";
   updateSparkMeter();
   completeTaskButton.disabled = true;
   completeTaskButton.textContent = "Clear quest";
@@ -211,13 +215,28 @@ function updateTaskReadyState() {
 
 function updateSparkMeter() {
   sparkMeter.textContent = `${sparkLevel}%`;
+  sparkFill.style.width = `${sparkLevel}%`;
   simStage.classList.toggle("is-boosted", sparkLevel >= 45);
+  simStage.classList.toggle("is-maxed", sparkLevel >= 90);
 }
 
-function boostSpark(amount) {
+function boostSpark(amount, action) {
+  const feedback = {
+    scan: "Scanner found a useful clue. Nice detective work.",
+    build: "Your idea is on the launch pad. The ship is waking up.",
+    launch: "Boost fired. Watch the ship jump toward the target.",
+  };
+
   sparkLevel = Math.min(100, sparkLevel + amount);
+  simStage.dataset.state = action;
+  simFeedback.textContent = feedback[action] || "The cockpit is powered up.";
   updateSparkMeter();
   updateTaskReadyState();
+}
+
+function flashQuestWin(title) {
+  simStage.dataset.state = "win";
+  simFeedback.textContent = `${title} cleared. New quest loading.`;
 }
 
 function moveToNextTask() {
@@ -253,7 +272,8 @@ completeTaskButton.addEventListener("click", () => {
   finishedTasks += 1;
   taskCount.textContent = pathProgress[activePath].length;
   renderTrainingLog();
-  moveToNextTask();
+  flashQuestWin(finishedTitle);
+  window.setTimeout(moveToNextTask, 780);
 });
 
 skipTaskButton.addEventListener("click", moveToNextTask);
@@ -261,7 +281,7 @@ simChoices.addEventListener("click", (event) => {
   const choice = event.target.closest("button");
   if (!choice) return;
 
-  boostSpark(Number(choice.dataset.boost));
+  boostSpark(Number(choice.dataset.boost), choice.dataset.action);
 });
 
 const earnedBadges = new Set();
@@ -278,6 +298,19 @@ let selectedPart = null;
 let dragState = null;
 let partNumber = 0;
 let buildNeedsRetest = false;
+
+function launchBadgeConfetti() {
+  badgePop.querySelectorAll(".confetti-bit").forEach((bit) => bit.remove());
+
+  for (let index = 0; index < 24; index += 1) {
+    const bit = document.createElement("span");
+    bit.className = "confetti-bit";
+    bit.style.setProperty("--spin", `${index * 17}deg`);
+    bit.style.setProperty("--distance", `${110 + (index % 4) * 22}px`);
+    bit.style.setProperty("--delay", `${(index % 6) * 35}ms`);
+    badgePop.append(bit);
+  }
+}
 
 const partDefaults = {
   nose: { className: "part-nose", label: "Nose cone", x: 245, y: 76 },
@@ -520,9 +553,10 @@ document.querySelectorAll(".badge-button").forEach((button) => {
     badgeCount.textContent = earnedBadges.size;
     badgeMessage.textContent =
       earnedBadges.size === 3
-        ? "Training record complete: you tried every mini mission."
-        : `${badge} added to your training record.`;
+        ? "Badge board complete. You tried every mini mission."
+        : `${badge} is glowing on your badge board.`;
     badgePopCopy.textContent = `${badge} unlocked`;
+    launchBadgeConfetti();
     badgePop.setAttribute("aria-hidden", "false");
     badgePop.classList.remove("is-visible");
     void badgePop.offsetWidth;
