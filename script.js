@@ -22,9 +22,9 @@ const pathData = {
   },
   lead: {
     title: "Mission Director",
-    copy: "Help the crew choose, solve surprises, and keep the mission moving.",
-    skill: "Listen, organize jobs, and make a launch plan",
-    mission: "Run a quick crew meeting and assign launch roles",
+    copy: "Lead the countdown, read mission clues, and decide if the rocket is go for launch.",
+    skill: "Watch space data, organize launch stations, and make go/no-go decisions",
+    mission: "Run a mission-control huddle and clear the rocket for liftoff",
     prepTitle: "Crew Captain Training",
   },
 };
@@ -103,9 +103,9 @@ const taskDecks = {
     {
       type: "Team planning",
       title: "Assign launch roles",
-      copy: "Your crew needs jobs before launch. Decide who builds, tests, times, and takes notes.",
-      steps: ["List three mission jobs", "Choose the first job to start", "Write one check-in question"],
-      note: "Mission note: write your crew job plan.",
+      copy: "The countdown is ticking. Give your crew launch-control stations for weather, fuel, guidance, communications, and crew safety so the rocket can blast off.",
+      steps: ["Pick three mission-control stations", "Name the space data each station checks", "Write the final go/no-go call"],
+      note: "Mission note: write your launch-control lineup and the clue each station must check.",
     },
     {
       type: "Decision drill",
