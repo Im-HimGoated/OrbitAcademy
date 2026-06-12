@@ -143,7 +143,7 @@
               <h3 id="training-path-title">Aerospace Engineer Prep</h3>
             </div>
             <div class="training-score" aria-label="Path training progress">
-              <span>Quest wins</span>
+              <span id="score-label">Quest wins</span>
               <strong id="task-count">0</strong>
             </div>
           </div>
@@ -155,6 +155,64 @@
               <p id="task-copy">
                 Choose one change to help a paper rocket fly straighter.
               </p>
+              <div class="part-explorer is-hidden" id="part-explorer" aria-label="Rocket, satellite, and rover parts lab">
+                <div class="part-map" aria-label="Choose a rocket, satellite, or rover part">
+                  <button class="part-hotspot is-active" type="button" data-part-key="rocket-nose">
+                    <span>Rocket</span>
+                    Nose cone
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rocket-fuel">
+                    <span>Rocket</span>
+                    Fuel tank
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rocket-engine">
+                    <span>Rocket</span>
+                    Engine
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rocket-fins">
+                    <span>Rocket</span>
+                    Fins
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="satellite-panels">
+                    <span>Satellite</span>
+                    Solar panels
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="satellite-antenna">
+                    <span>Satellite</span>
+                    Antenna
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="satellite-sensor">
+                    <span>Satellite</span>
+                    Camera sensor
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="satellite-computer">
+                    <span>Satellite</span>
+                    Computer
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rover-wheels">
+                    <span>Rover</span>
+                    Wheels
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rover-camera">
+                    <span>Rover</span>
+                    Camera mast
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rover-arm">
+                    <span>Rover</span>
+                    Robot arm
+                  </button>
+                  <button class="part-hotspot" type="button" data-part-key="rover-antenna">
+                    <span>Rover</span>
+                    Antenna
+                  </button>
+                </div>
+                <article class="part-lesson" aria-live="polite">
+                  <span id="part-kind">Rocket part</span>
+                  <h5 id="part-name">Nose cone</h5>
+                  <p id="part-copy">Tap a part to learn what it does in space.</p>
+                  <ul id="part-facts"></ul>
+                </article>
+              </div>
               <div class="training-sim" aria-label="Interactive 3D training bay">
                 <div class="sim-stage" id="sim-stage">
                   <div class="sim-title">3D Training Bay</div>
@@ -201,7 +259,7 @@
             </article>
 
             <aside class="training-log" aria-label="Completed path training tasks">
-              <span>Quest log</span>
+              <span id="training-log-label">Quest log</span>
               <ol id="training-log-list">
                 <li>Clear a quest to start your log.</li>
               </ol>

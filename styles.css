@@ -739,6 +739,110 @@ h3 {
   line-height: 1.6;
 }
 
+.is-hidden {
+  display: none !important;
+}
+
+.part-explorer {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(260px, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.part-map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-content: start;
+  padding: 14px;
+  border: 2px solid rgba(67, 234, 216, 0.42);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    rgba(7, 17, 57, 0.72);
+  background-size: 26px 26px;
+}
+
+.part-hotspot {
+  min-height: 72px;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 950;
+  text-align: left;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.part-hotspot span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.part-hotspot:hover,
+.part-hotspot:focus-visible,
+.part-hotspot.is-active {
+  border-color: var(--teal);
+  background: rgba(67, 234, 216, 0.16);
+  transform: translateY(-2px);
+}
+
+.part-lesson {
+  min-height: 100%;
+  padding: clamp(18px, 3vw, 26px);
+  border: 2px solid rgba(255, 212, 71, 0.46);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 212, 71, 0.24), transparent 8rem),
+    rgba(255, 255, 255, 0.08);
+}
+
+.part-lesson span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.part-lesson h5 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 1;
+}
+
+.part-lesson p {
+  color: #eef5ff;
+  font-size: 1.04rem;
+}
+
+.part-lesson ul {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.part-lesson li {
+  padding: 10px 12px;
+  border-left: 4px solid var(--lime);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 .training-sim {
   display: grid;
   grid-template-columns: minmax(280px, 1fr) minmax(220px, 0.38fr);
@@ -1454,6 +1558,7 @@ h3 {
   .path-tool,
   .task-workbench,
   .training-sim,
+  .part-explorer,
   .builder-shell {
     grid-template-columns: 1fr;
   }
@@ -1484,7 +1589,8 @@ h3 {
 
   .plan-grid,
   .mission-grid,
-  .output-grid {
+  .output-grid,
+  .part-map {
     grid-template-columns: 1fr;
   }
 

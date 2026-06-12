@@ -1,10 +1,10 @@
 const pathData = {
   build: {
     title: "Aerospace Engineer",
-    copy: "Invent rocket parts, test them, and keep improving until your launch idea is ready.",
-    skill: "Measure, sketch, and improve your invention",
-    mission: "Build a paper rocket, change one fin, and race the flights",
-    prepTitle: "Rocket Builder Training",
+    copy: "Explore rocket, satellite, and rover parts to see how space machines work.",
+    skill: "Notice what each space part does and why it matters",
+    mission: "Tap a part, learn its job, and collect parts for your space machine map",
+    prepTitle: "Space Parts Lab",
   },
   code: {
     title: "Flight Software Developer",
@@ -130,6 +130,7 @@ const roleCopy = document.querySelector("#role-copy");
 const skillOutput = document.querySelector("#skill-output");
 const missionOutput = document.querySelector("#mission-output");
 const trainingPathTitle = document.querySelector("#training-path-title");
+const scoreLabel = document.querySelector("#score-label");
 const taskType = document.querySelector("#task-type");
 const taskTitle = document.querySelector("#task-title");
 const taskCopy = document.querySelector("#task-copy");
@@ -139,16 +140,27 @@ const noteLabel = document.querySelector("#note-label");
 const completeTaskButton = document.querySelector("#complete-task");
 const skipTaskButton = document.querySelector("#skip-task");
 const taskCount = document.querySelector("#task-count");
+const trainingLogLabel = document.querySelector("#training-log-label");
 const trainingLogList = document.querySelector("#training-log-list");
+const partExplorer = document.querySelector("#part-explorer");
+const partButtons = document.querySelectorAll(".part-hotspot");
+const partKind = document.querySelector("#part-kind");
+const partName = document.querySelector("#part-name");
+const partCopy = document.querySelector("#part-copy");
+const partFacts = document.querySelector("#part-facts");
 const sparkMeter = document.querySelector("#spark-meter");
 const sparkFill = document.querySelector("#spark-fill");
 const simFeedback = document.querySelector("#sim-feedback");
 const simStage = document.querySelector("#sim-stage");
 const simChoices = document.querySelector("#sim-choices");
+const trainingSim = document.querySelector(".training-sim");
+const missionNote = document.querySelector(".mission-note");
+const taskActions = document.querySelector(".task-actions");
 let activePath = "build";
 let activeTaskIndex = 0;
 let finishedTasks = 0;
 let sparkLevel = 0;
+const learnedParts = new Set();
 const pathProgress = {
   build: [],
   code: [],
@@ -179,11 +191,128 @@ const simLessons = {
   },
 };
 
+const partLessons = {
+  "rocket-nose": {
+    kind: "Rocket part",
+    name: "Nose cone",
+    copy: "The nose cone is the pointy front. It helps the rocket push through air without wobbling as much.",
+    facts: ["Smooth shapes cut through air better.", "A strong nose cone protects the top of the rocket."],
+  },
+  "rocket-fuel": {
+    kind: "Rocket part",
+    name: "Fuel tank",
+    copy: "The fuel tank carries the fuel that the engine burns to make a huge push upward.",
+    facts: ["Rockets need lots of fuel because Earth pulls them down with gravity.", "Less wasted weight can help a rocket fly higher."],
+  },
+  "rocket-engine": {
+    kind: "Rocket part",
+    name: "Engine",
+    copy: "The engine blasts hot gas downward. That push sends the rocket upward toward space.",
+    facts: ["This push is called thrust.", "More thrust helps a rocket lift off the launch pad."],
+  },
+  "rocket-fins": {
+    kind: "Rocket part",
+    name: "Fins",
+    copy: "Fins help a rocket stay steady, like feathers help an arrow fly straight.",
+    facts: ["Fins fight wobbling in the air.", "Changing fin size or shape can change how straight a rocket flies."],
+  },
+  "satellite-panels": {
+    kind: "Satellite part",
+    name: "Solar panels",
+    copy: "Solar panels catch sunlight and turn it into power for the satellite.",
+    facts: ["Satellites need power to run cameras, radios, and computers.", "Panels spread out wide to catch more sunlight."],
+  },
+  "satellite-antenna": {
+    kind: "Satellite part",
+    name: "Antenna",
+    copy: "The antenna sends messages to Earth and receives commands from mission control.",
+    facts: ["Without an antenna, a satellite could not share what it learns.", "Radio signals can travel through space."],
+  },
+  "satellite-sensor": {
+    kind: "Satellite part",
+    name: "Camera sensor",
+    copy: "A camera sensor helps the satellite take pictures or measure things from far above Earth.",
+    facts: ["Some sensors track clouds, fires, oceans, or planets.", "Scientists use sensor data to answer questions."],
+  },
+  "satellite-computer": {
+    kind: "Satellite part",
+    name: "Computer",
+    copy: "The computer is the satellite brain. It follows commands and keeps the satellite working.",
+    facts: ["Computers help aim the satellite.", "They can save data until the antenna sends it home."],
+  },
+  "rover-wheels": {
+    kind: "Rover part",
+    name: "Wheels",
+    copy: "Rover wheels grip dusty ground so the rover can crawl over rocks, sand, and bumps.",
+    facts: ["Rovers drive slowly so they do not get stuck.", "Wheel tracks help scientists see how soft the ground is."],
+  },
+  "rover-camera": {
+    kind: "Rover part",
+    name: "Camera mast",
+    copy: "The camera mast is like a rover's tall eyes. It looks around and helps choose where to drive.",
+    facts: ["Cameras can spot rocks that might be interesting.", "Pictures help scientists plan the rover's next move."],
+  },
+  "rover-arm": {
+    kind: "Rover part",
+    name: "Robot arm",
+    copy: "The robot arm reaches out to touch rocks, scoop soil, or use tiny science tools.",
+    facts: ["A rover arm can study rocks up close.", "Some arms help collect samples for scientists."],
+  },
+  "rover-antenna": {
+    kind: "Rover part",
+    name: "Antenna",
+    copy: "The rover antenna sends pictures and science clues back to Earth.",
+    facts: ["Rovers are far away, so messages take time to travel.", "The antenna also receives new driving commands."],
+  },
+};
+
+function renderPartLesson(partKey, shouldRecord = true) {
+  const lesson = partLessons[partKey] || partLessons["rocket-nose"];
+
+  partKind.textContent = lesson.kind;
+  partName.textContent = lesson.name;
+  partCopy.textContent = lesson.copy;
+  partFacts.innerHTML = "";
+
+  lesson.facts.forEach((fact) => {
+    const item = document.createElement("li");
+    item.textContent = fact;
+    partFacts.append(item);
+  });
+
+  partButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.partKey === partKey);
+  });
+
+  if (shouldRecord) learnedParts.add(lesson.name);
+  renderTrainingLog();
+}
+
 function renderTask() {
   const selected = pathData[activePath];
   const task = taskDecks[activePath][activeTaskIndex];
 
   trainingPathTitle.textContent = selected.prepTitle;
+  scoreLabel.textContent = activePath === "build" ? "Parts learned" : "Quest wins";
+
+  if (activePath === "build") {
+    taskType.textContent = "Parts explorer";
+    taskTitle.textContent = "Tap rocket, satellite, and rover parts";
+    taskCopy.textContent = "Pick a part to learn what it does, why it matters, and one simple space fact.";
+    partExplorer.classList.remove("is-hidden");
+    trainingSim.classList.add("is-hidden");
+    taskChecklist.classList.add("is-hidden");
+    missionNote.classList.add("is-hidden");
+    taskActions.classList.add("is-hidden");
+    renderPartLesson("rocket-nose", false);
+    return;
+  }
+
+  partExplorer.classList.add("is-hidden");
+  trainingSim.classList.remove("is-hidden");
+  taskChecklist.classList.remove("is-hidden");
+  missionNote.classList.remove("is-hidden");
+  taskActions.classList.remove("is-hidden");
   taskType.textContent = task.type;
   taskTitle.textContent = task.title;
   taskCopy.textContent = task.copy;
@@ -208,7 +337,29 @@ function renderTask() {
 }
 
 function renderTrainingLog() {
+  if (activePath === "build") {
+    const learned = Array.from(learnedParts);
+    trainingLogLabel.textContent = "Parts learned";
+    taskCount.textContent = learned.length;
+    trainingLogList.innerHTML = "";
+
+    if (learned.length === 0) {
+      const emptyItem = document.createElement("li");
+      emptyItem.textContent = "Tap a part to start your space machine map.";
+      trainingLogList.append(emptyItem);
+      return;
+    }
+
+    learned.slice(-6).forEach((part) => {
+      const item = document.createElement("li");
+      item.textContent = part;
+      trainingLogList.append(item);
+    });
+    return;
+  }
+
   const completed = pathProgress[activePath];
+  trainingLogLabel.textContent = "Quest log";
   taskCount.textContent = completed.length;
   trainingLogList.innerHTML = "";
 
@@ -301,6 +452,10 @@ simChoices.addEventListener("click", (event) => {
   if (!choice) return;
 
   boostSpark(Number(choice.dataset.boost), choice.dataset.action);
+});
+
+partButtons.forEach((button) => {
+  button.addEventListener("click", () => renderPartLesson(button.dataset.partKey));
 });
 
 const earnedBadges = new Set();
@@ -571,7 +726,7 @@ document.querySelectorAll(".badge-button").forEach((button) => {
     button.disabled = true;
     badgeCount.textContent = earnedBadges.size;
     badgeMessage.textContent =
-      earnedBadges.size === 3
+      earnedBadges.size === 4
         ? "Badge board complete. You tried every mini mission."
         : `${badge} is glowing on your badge board.`;
     badgePopCopy.textContent = `${badge} unlocked`;
