@@ -156,6 +156,29 @@ const pathProgress = {
   lead: [],
 };
 
+const simLessons = {
+  build: {
+    scan: "Space clue: fins help a rocket stay pointed forward. If the rocket wiggles, the air is pushing it off balance.",
+    build: "Test idea: change only one rocket part at a time. Real engineers test one change so they know what helped.",
+    launch: "Launch fact: a stable rocket flies straighter because its nose, body, fins, and engine work together.",
+  },
+  code: {
+    scan: "Space clue: satellites follow exact commands. One missing turn can send the whole path the wrong way.",
+    build: "Test idea: write commands in order, then debug them. Space robots cannot guess what you meant.",
+    launch: "Launch fact: spacecraft use sensors and instructions to steer, scan, and send data back to Earth.",
+  },
+  explore: {
+    scan: "Space clue: rovers look for evidence. Color, shape, layers, and tiny holes can tell scientists a rock's story.",
+    build: "Test idea: pick the sample that answers a question. A rover should collect the rock with the best clue.",
+    launch: "Launch fact: rover samples can teach us if a planet once had water, volcanoes, or places life could survive.",
+  },
+  lead: {
+    scan: "Space clue: launch teams check wind, lightning, fuel, guidance, radio, and crew safety before liftoff.",
+    build: "Test idea: give every kid one launch check. If one station says no-go, the smart move is to wait.",
+    launch: "Launch fact: go means the rocket is ready. No-go means something needs fixing before astronauts are safe.",
+  },
+};
+
 function renderTask() {
   const selected = pathData[activePath];
   const task = taskDecks[activePath][activeTaskIndex];
@@ -168,7 +191,7 @@ function renderTask() {
   taskNote.value = "";
   sparkLevel = 0;
   simStage.dataset.state = "ready";
-  simFeedback.textContent = "Press the cockpit buttons to power the ship before you clear the quest.";
+  simFeedback.textContent = "Press each cockpit button to learn a space clue before you clear the quest.";
   updateSparkMeter();
   completeTaskButton.disabled = true;
   completeTaskButton.textContent = "Clear quest";
@@ -221,11 +244,7 @@ function updateSparkMeter() {
 }
 
 function boostSpark(amount, action) {
-  const feedback = {
-    scan: "Scanner found a useful clue. Nice detective work.",
-    build: "Your idea is on the launch pad. The ship is waking up.",
-    launch: "Boost fired. Watch the ship jump toward the target.",
-  };
+  const feedback = simLessons[activePath] || simLessons.build;
 
   sparkLevel = Math.min(100, sparkLevel + amount);
   simStage.dataset.state = action;
