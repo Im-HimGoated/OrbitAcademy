@@ -22,9 +22,9 @@ const pathData = {
   },
   lead: {
     title: "Mission Director",
-    copy: "Lead the countdown, read mission clues, and decide if the rocket is go for launch.",
-    skill: "Watch space data, organize launch stations, and make go/no-go decisions",
-    mission: "Run a mission-control huddle and clear the rocket for liftoff",
+    copy: "Lead the countdown and decide if the rocket is safe to launch or needs to wait.",
+    skill: "Check wind, lightning, fuel, orbit path, radio, and crew safety",
+    mission: "Run a mission-control huddle and call go or no-go for liftoff",
     prepTitle: "Crew Captain Training",
   },
 };
@@ -103,9 +103,9 @@ const taskDecks = {
     {
       type: "Team planning",
       title: "Assign launch roles",
-      copy: "The countdown is ticking. Give your crew launch-control stations for weather, fuel, guidance, communications, and crew safety so the rocket can blast off.",
-      steps: ["Pick three mission-control stations", "Name the space data each station checks", "Write the final go/no-go call"],
-      note: "Mission note: write your launch-control lineup and the clue each station must check.",
+      copy: "The countdown is ticking. Wind or lightning can stop launch, fuel gives the rocket a big push, guidance aims toward orbit, radio keeps the crew talking, and safety protects astronauts.",
+      steps: ["Pick three launch jobs", "Say the space fact each job checks", "Call go to launch or no-go to wait"],
+      note: "Mission note: write your launch jobs and what each kid checks before liftoff.",
     },
     {
       type: "Decision drill",
