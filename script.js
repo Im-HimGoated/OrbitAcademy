@@ -143,6 +143,8 @@ const taskCount = document.querySelector("#task-count");
 const trainingLogLabel = document.querySelector("#training-log-label");
 const trainingLogList = document.querySelector("#training-log-list");
 const partExplorer = document.querySelector("#part-explorer");
+const partMap = document.querySelector("#part-map");
+const machineTabs = document.querySelectorAll(".machine-tab");
 const partButtons = document.querySelectorAll(".part-hotspot");
 const partKind = document.querySelector("#part-kind");
 const partName = document.querySelector("#part-name");
@@ -266,12 +268,20 @@ const partLessons = {
   },
 };
 
+const machineStartParts = {
+  rocket: "rocket-nose",
+  satellite: "satellite-panels",
+  rover: "rover-wheels",
+};
+
 function renderPartLesson(partKey, shouldRecord = true) {
   const lesson = partLessons[partKey] || partLessons["rocket-nose"];
+  const machine = partKey.split("-")[0];
 
   partKind.textContent = lesson.kind;
   partName.textContent = lesson.name;
   partCopy.textContent = lesson.copy;
+  partMap.dataset.machine = machine;
   partFacts.innerHTML = "";
 
   lesson.facts.forEach((fact) => {
@@ -282,6 +292,9 @@ function renderPartLesson(partKey, shouldRecord = true) {
 
   partButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.partKey === partKey);
+  });
+  machineTabs.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.machineTab === machine);
   });
 
   if (shouldRecord) learnedParts.add(lesson.name);
@@ -456,6 +469,12 @@ simChoices.addEventListener("click", (event) => {
 
 partButtons.forEach((button) => {
   button.addEventListener("click", () => renderPartLesson(button.dataset.partKey));
+});
+
+machineTabs.forEach((button) => {
+  button.addEventListener("click", () => {
+    renderPartLesson(machineStartParts[button.dataset.machineTab], false);
+  });
 });
 
 const earnedBadges = new Set();

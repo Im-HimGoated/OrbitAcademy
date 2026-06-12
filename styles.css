@@ -22,12 +22,14 @@
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 92px;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background:
     linear-gradient(90deg, rgba(255, 212, 71, 0.12) 0 12px, transparent 12px 38px),
     linear-gradient(180deg, var(--deep), var(--space) 46%, #172454);
@@ -751,11 +753,10 @@ h3 {
 }
 
 .part-map {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  align-content: start;
+  position: relative;
+  min-height: 520px;
   padding: 14px;
+  overflow: hidden;
   border: 2px solid rgba(67, 234, 216, 0.42);
   border-radius: 8px;
   background:
@@ -765,17 +766,303 @@ h3 {
   background-size: 26px 26px;
 }
 
-.part-hotspot {
-  min-height: 72px;
-  padding: 10px;
+.machine-picture {
+  position: absolute;
+  inset: 112px 34px 72px;
+  display: grid;
+  place-items: center;
+}
+
+.machine-tabs {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.machine-tab {
+  min-height: 44px;
   border: 2px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.08);
   color: var(--ink);
   cursor: pointer;
   font-weight: 950;
+}
+
+.machine-tab:hover,
+.machine-tab:focus-visible,
+.machine-tab.is-active {
+  border-color: var(--gold);
+  background: rgba(255, 212, 71, 0.18);
+  color: #fff;
+}
+
+.machine-view {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.part-map[data-machine="rocket"] .rocket-picture,
+.part-map[data-machine="satellite"] .satellite-picture,
+.part-map[data-machine="rover"] .rover-picture {
+  display: block;
+}
+
+.rocket-picture {
+  left: 50%;
+  width: min(190px, 52%);
+  margin: 0 auto;
+}
+
+.rocket-nose-art {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 88px;
+  height: 94px;
+  background: linear-gradient(135deg, #fff, #9ee8ff);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform: translateX(-50%);
+}
+
+.rocket-body-art {
+  position: absolute;
+  top: 92px;
+  left: 50%;
+  width: 98px;
+  height: 190px;
+  border-radius: 26px 26px 16px 16px;
+  background: linear-gradient(90deg, #dce8ff, #ffffff 48%, #79bdf7);
+  transform: translateX(-50%);
+  box-shadow: inset -16px 0 0 rgba(33, 74, 167, 0.16);
+}
+
+.rocket-window-art {
+  position: absolute;
+  top: 132px;
+  left: 50%;
+  width: 42px;
+  height: 42px;
+  border: 5px solid #17326d;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #fff, var(--teal));
+  transform: translateX(-50%);
+}
+
+.rocket-fins-art {
+  position: absolute;
+  top: 230px;
+  left: 50%;
+  width: 156px;
+  height: 78px;
+  background: var(--coral);
+  clip-path: polygon(0 100%, 26% 8%, 50% 44%, 74% 8%, 100% 100%, 72% 82%, 28% 82%);
+  transform: translateX(-50%);
+}
+
+.rocket-fire-art {
+  position: absolute;
+  top: 292px;
+  left: 50%;
+  width: 64px;
+  height: 86px;
+  background: linear-gradient(180deg, var(--gold), var(--orange), transparent);
+  clip-path: polygon(50% 100%, 0 0, 48% 30%, 100% 0);
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 18px rgba(255, 212, 71, 0.8));
+}
+
+.satellite-picture {
+  top: 50%;
+  height: 260px;
+  transform: translateY(-50%);
+}
+
+.satellite-body-art {
+  position: absolute;
+  top: 84px;
+  left: 50%;
+  width: 116px;
+  height: 106px;
+  border: 5px solid #8ad8ff;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1e55b6, #14245e);
+  transform: translateX(-50%) rotate(8deg);
+}
+
+.satellite-panel-art {
+  position: absolute;
+  top: 100px;
+  width: 118px;
+  height: 72px;
+  border: 4px solid #43ead8;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.18) 2px, transparent 2px),
+    linear-gradient(135deg, #17326d, #3a7ce6);
+  background-size: 24px 24px;
+}
+
+.panel-left {
+  left: 18px;
+  transform: rotate(-7deg);
+}
+
+.panel-right {
+  right: 18px;
+  transform: rotate(7deg);
+}
+
+.satellite-antenna-art {
+  position: absolute;
+  top: 22px;
+  left: 54%;
+  width: 72px;
+  height: 72px;
+  border-top: 5px solid var(--gold);
+  border-right: 5px solid var(--gold);
+  border-radius: 0 100% 0 0;
+  transform: rotate(-16deg);
+}
+
+.satellite-sensor-art {
+  position: absolute;
+  top: 121px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #071139;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, var(--gold), var(--coral));
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.rover-picture {
+  top: 50%;
+  height: 270px;
+  transform: translateY(-44%);
+}
+
+.rover-body-art {
+  position: absolute;
+  right: 72px;
+  bottom: 72px;
+  left: 72px;
+  height: 90px;
+  border: 5px solid #8ad8ff;
+  border-radius: 22px 22px 12px 12px;
+  background: linear-gradient(135deg, #a6bfdc, #ffffff 46%, #71a4d8);
+}
+
+.rover-mast-art {
+  position: absolute;
+  top: 30px;
+  left: 48%;
+  width: 18px;
+  height: 108px;
+  background: #dce8ff;
+  transform: translateX(-50%);
+}
+
+.rover-mast-art::before {
+  position: absolute;
+  top: -24px;
+  left: -34px;
+  width: 86px;
+  height: 38px;
+  content: "";
+  border-radius: 18px;
+  background: linear-gradient(90deg, #17326d, #6bb6ff);
+}
+
+.rover-arm-art {
+  position: absolute;
+  right: 32px;
+  bottom: 104px;
+  width: 96px;
+  height: 12px;
+  background: var(--gold);
+  transform: rotate(-20deg);
+  transform-origin: left;
+}
+
+.rover-arm-art::after {
+  position: absolute;
+  right: -14px;
+  top: -10px;
+  width: 28px;
+  height: 28px;
+  content: "";
+  border: 5px solid var(--gold);
+  border-left: 0;
+  border-radius: 50%;
+}
+
+.rover-wheel-art {
+  position: absolute;
+  bottom: 34px;
+  width: 58px;
+  height: 58px;
+  border: 8px solid #071139;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--teal) 0 26%, #6f7f94 27% 100%);
+}
+
+.wheel-one {
+  left: 76px;
+}
+
+.wheel-two {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wheel-three {
+  right: 76px;
+}
+
+.part-controls {
+  position: absolute;
+  inset: 0;
+}
+
+.part-hotspot {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  display: none;
+  min-width: 118px;
+  min-height: 58px;
+  padding: 9px 10px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(7, 17, 57, 0.9);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 950;
   text-align: left;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.part-map[data-machine="rocket"] .part-hotspot[data-part-key^="rocket"],
+.part-map[data-machine="satellite"] .part-hotspot[data-part-key^="satellite"],
+.part-map[data-machine="rover"] .part-hotspot[data-part-key^="rover"] {
+  display: block;
+}
+
+.part-hotspot::after {
+  position: absolute;
+  right: 14px;
+  bottom: -12px;
+  width: 22px;
+  height: 14px;
+  content: "";
+  background: inherit;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .part-hotspot span {
@@ -792,17 +1079,32 @@ h3 {
 .part-hotspot.is-active {
   border-color: var(--teal);
   background: rgba(67, 234, 216, 0.16);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .part-lesson {
+  position: relative;
   min-height: 100%;
   padding: clamp(18px, 3vw, 26px);
   border: 2px solid rgba(255, 212, 71, 0.46);
-  border-radius: 8px;
+  border-radius: 22px;
   background:
     radial-gradient(circle at top right, rgba(255, 212, 71, 0.24), transparent 8rem),
-    rgba(255, 255, 255, 0.08);
+    rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.18);
+}
+
+.part-lesson::before {
+  position: absolute;
+  top: 42px;
+  left: -23px;
+  width: 34px;
+  height: 34px;
+  content: "";
+  border-bottom: 2px solid rgba(255, 212, 71, 0.46);
+  border-left: 2px solid rgba(255, 212, 71, 0.46);
+  background: rgba(34, 44, 88, 0.98);
+  transform: rotate(45deg);
 }
 
 .part-lesson span {
@@ -1616,6 +1918,46 @@ h3 {
 
   .sim-stage {
     min-height: 260px;
+  }
+
+  .part-map {
+    display: grid;
+    min-height: auto;
+    gap: 14px;
+  }
+
+  .machine-picture {
+    position: relative;
+    inset: auto;
+    min-height: 340px;
+  }
+
+  .machine-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .part-controls {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .part-hotspot {
+    position: static;
+    display: none !important;
+    min-width: 0;
+  }
+
+  .part-map[data-machine="rocket"] .part-hotspot[data-part-key^="rocket"],
+  .part-map[data-machine="satellite"] .part-hotspot[data-part-key^="satellite"],
+  .part-map[data-machine="rover"] .part-hotspot[data-part-key^="rover"] {
+    display: block !important;
+  }
+
+  .part-hotspot::after,
+  .part-lesson::before {
+    display: none;
   }
 }
 

@@ -156,55 +156,86 @@
                 Choose one change to help a paper rocket fly straighter.
               </p>
               <div class="part-explorer is-hidden" id="part-explorer" aria-label="Rocket, satellite, and rover parts lab">
-                <div class="part-map" aria-label="Choose a rocket, satellite, or rover part">
-                  <button class="part-hotspot is-active" type="button" data-part-key="rocket-nose">
-                    <span>Rocket</span>
-                    Nose cone
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rocket-fuel">
-                    <span>Rocket</span>
-                    Fuel tank
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rocket-engine">
-                    <span>Rocket</span>
-                    Engine
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rocket-fins">
-                    <span>Rocket</span>
-                    Fins
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="satellite-panels">
-                    <span>Satellite</span>
-                    Solar panels
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="satellite-antenna">
-                    <span>Satellite</span>
-                    Antenna
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="satellite-sensor">
-                    <span>Satellite</span>
-                    Camera sensor
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="satellite-computer">
-                    <span>Satellite</span>
-                    Computer
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rover-wheels">
-                    <span>Rover</span>
-                    Wheels
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rover-camera">
-                    <span>Rover</span>
-                    Camera mast
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rover-arm">
-                    <span>Rover</span>
-                    Robot arm
-                  </button>
-                  <button class="part-hotspot" type="button" data-part-key="rover-antenna">
-                    <span>Rover</span>
-                    Antenna
-                  </button>
+                <div class="part-map" id="part-map" data-machine="rocket" aria-label="Choose a rocket, satellite, or rover part">
+                  <div class="machine-tabs" aria-label="Choose a space machine picture">
+                    <button class="machine-tab is-active" type="button" data-machine-tab="rocket">Rocket</button>
+                    <button class="machine-tab" type="button" data-machine-tab="satellite">Satellite</button>
+                    <button class="machine-tab" type="button" data-machine-tab="rover">Rover</button>
+                  </div>
+                  <div class="machine-picture" aria-hidden="true">
+                    <div class="rocket-picture machine-view" data-machine-view="rocket">
+                      <div class="rocket-nose-art"></div>
+                      <div class="rocket-body-art"></div>
+                      <div class="rocket-window-art"></div>
+                      <div class="rocket-fins-art"></div>
+                      <div class="rocket-fire-art"></div>
+                    </div>
+                    <div class="satellite-picture machine-view" data-machine-view="satellite">
+                      <div class="satellite-panel-art panel-left"></div>
+                      <div class="satellite-body-art"></div>
+                      <div class="satellite-panel-art panel-right"></div>
+                      <div class="satellite-antenna-art"></div>
+                      <div class="satellite-sensor-art"></div>
+                    </div>
+                    <div class="rover-picture machine-view" data-machine-view="rover">
+                      <div class="rover-mast-art"></div>
+                      <div class="rover-body-art"></div>
+                      <div class="rover-arm-art"></div>
+                      <div class="rover-wheel-art wheel-one"></div>
+                      <div class="rover-wheel-art wheel-two"></div>
+                      <div class="rover-wheel-art wheel-three"></div>
+                    </div>
+                  </div>
+                  <div class="part-controls">
+                    <button class="part-hotspot is-active" type="button" data-part-key="rocket-nose" style="--x: 44%; --y: 4%;">
+                      <span>Rocket</span>
+                      Nose cone
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rocket-fuel" style="--x: 8%; --y: 36%;">
+                      <span>Rocket</span>
+                      Fuel tank
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rocket-engine" style="--x: 39%; --y: 78%;">
+                      <span>Rocket</span>
+                      Engine
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rocket-fins" style="--x: 72%; --y: 60%;">
+                      <span>Rocket</span>
+                      Fins
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="satellite-panels" style="--x: 5%; --y: 32%;">
+                      <span>Satellite</span>
+                      Solar panels
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="satellite-antenna" style="--x: 60%; --y: 2%;">
+                      <span>Satellite</span>
+                      Antenna
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="satellite-sensor" style="--x: 43%; --y: 53%;">
+                      <span>Satellite</span>
+                      Camera sensor
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="satellite-computer" style="--x: 63%; --y: 47%;">
+                      <span>Satellite</span>
+                      Computer
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rover-wheels" style="--x: 7%; --y: 71%;">
+                      <span>Rover</span>
+                      Wheels
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rover-camera" style="--x: 42%; --y: 7%;">
+                      <span>Rover</span>
+                      Camera mast
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rover-arm" style="--x: 68%; --y: 41%;">
+                      <span>Rover</span>
+                      Robot arm
+                    </button>
+                    <button class="part-hotspot" type="button" data-part-key="rover-antenna" style="--x: 17%; --y: 20%;">
+                      <span>Rover</span>
+                      Antenna
+                    </button>
+                  </div>
                 </div>
                 <article class="part-lesson" aria-live="polite">
                   <span id="part-kind">Rocket part</span>
