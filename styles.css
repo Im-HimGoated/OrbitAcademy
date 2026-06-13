@@ -812,9 +812,8 @@ h3 {
 }
 
 .rocket-picture {
-  left: 50%;
-  width: min(190px, 52%);
-  margin: 0 auto;
+  inset: 0;
+  width: 100%;
 }
 
 .rocket-nose-art {
@@ -1035,7 +1034,7 @@ h3 {
   top: var(--y);
   left: var(--x);
   display: none;
-  min-width: 118px;
+  min-width: 108px;
   min-height: 58px;
   padding: 9px 10px;
   border: 2px solid rgba(255, 255, 255, 0.16);
@@ -1056,13 +1055,41 @@ h3 {
 
 .part-hotspot::after {
   position: absolute;
-  right: 14px;
-  bottom: -12px;
   width: 22px;
   height: 14px;
   content: "";
   background: inherit;
+}
+
+.part-hotspot[data-pointer="bottom"]::after {
+  right: 16px;
+  bottom: -12px;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.part-hotspot[data-pointer="top"]::after {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+.part-hotspot[data-pointer="left"]::after {
+  top: 50%;
+  left: -17px;
+  width: 18px;
+  height: 24px;
+  transform: translateY(-50%);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.part-hotspot[data-pointer="right"]::after {
+  top: 50%;
+  right: -17px;
+  width: 18px;
+  height: 24px;
+  transform: translateY(-50%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .part-hotspot span {
